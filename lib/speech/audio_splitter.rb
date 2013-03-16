@@ -42,7 +42,7 @@ module Speech
       # convert the audio file to flac format
       def to_flac
         chunk_outputfile = chunk.gsub(/#{File.extname(chunk)}$/, ".flac")
-        if system("ffmpeg -i #{chunk} -acodec flac #{chunk_outputfile} >/dev/null 2>&1")
+        if system("ffmpeg -i #{chunk} -vn -acodec flac #{chunk_outputfile} >/dev/null 2>&1")
           self.flac_chunk = chunk.gsub(/#{File.extname(chunk)}$/, ".flac")
           # convert the audio file to 16K
           self.flac_rate = `ffmpeg -i #{self.flac_chunk} 2>&1`.strip.scan(/Audio: flac, (.*) Hz/).first.first.strip
